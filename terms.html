@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service | SPECLINE TECH LLC</title>
+    <meta name="description" content="Terms of Service for SPECLINE TECH LLC and its products.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --mint-light: #e3f0ef;
+            --mint: #e2f1ef;
+            --navy: #0e2f50;
+            --teal: #22cac2;
+            --navy-dark: #091e33;
+            --navy-light: #1a4670;
+            --teal-glow: rgba(34, 202, 194, 0.3);
+            --white: #ffffff;
+            --font-display: 'Outfit', sans-serif;
+            --font-mono: 'Space Mono', monospace;
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-display);
+            background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+            color: var(--white);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Navigation */
+        .nav {
+            padding: 1.5rem 0;
+            background: rgba(14, 47, 80, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(34, 202, 194, 0.1);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--white);
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            filter: drop-shadow(0 0 6px rgba(34, 202, 194, 0.5));
+        }
+
+        .logo-text {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: var(--teal);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--mint-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s var(--transition-smooth);
+        }
+
+        .nav-links a:hover {
+            color: var(--teal);
+        }
+
+        /* Content */
+        .page-header {
+            padding: 4rem 0 2rem;
+            border-bottom: 1px solid rgba(34, 202, 194, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header .date {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--teal);
+        }
+
+        .content {
+            padding-bottom: 4rem;
+        }
+
+        .content section {
+            margin-bottom: 3rem;
+        }
+
+        .content h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--teal);
+            margin-bottom: 1rem;
+        }
+
+        .content p {
+            color: var(--mint-light);
+            margin-bottom: 1rem;
+        }
+
+        .content ul {
+            color: var(--mint-light);
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .content strong {
+            color: var(--white);
+        }
+
+        .content a {
+            color: var(--teal);
+            text-decoration: none;
+        }
+
+        .content a:hover {
+            text-decoration: underline;
+        }
+
+        .legal-notice {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--mint-light);
+            font-style: italic;
+        }
+
+        /* Footer */
+        .footer {
+            border-top: 1px solid rgba(34, 202, 194, 0.1);
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--mint-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--teal);
+        }
+
+        .footer-text {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="logo">
+                <img src="assets/images/logo-icon.png" alt="SPECLINE TECH">
+                <span class="logo-text">SPECLINE TECH</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <header class="page-header">
+            <h1>Terms of Service</h1>
+            <p class="date">Last Updated: January 27, 2026</p>
+        </header>
+
+        <div class="content">
+            <section>
+                <h2>1. Acceptance of Terms</h2>
+                <p>By accessing or using any website, application, or service operated by <strong>SPECLINE TECH LLC</strong> ("Company," "we," "us," or "our"), you agree to be bound by these Terms of Service. These terms affect your legal rights and obligations. If you do not agree to all of these terms, do not access or use our services.</p>
+            </section>
+
+            <section>
+                <h2>2. Description of Services</h2>
+                <p>SPECLINE TECH LLC is a technology holding company that develops and operates various digital products and services. Our current ventures include:</p>
+                <ul>
+                    <li><strong>Social Jukebox</strong> — A collaborative music application</li>
+                    <li><strong>Superpowers Store</strong> — A recognition and celebration brand (coming soon)</li>
+                </ul>
+                <p>Each product may have additional terms specific to that service.</p>
+            </section>
+
+            <section>
+                <h2>3. Intellectual Property</h2>
+                <p>All content, features, and functionality of our services — including but not limited to software, text, graphics, logos, icons, images, audio, and video — are the exclusive property of SPECLINE TECH LLC or our licensors and are protected by United States and international copyright, trademark, patent, and other intellectual property laws.</p>
+                <p>You may not reproduce, distribute, modify, create derivative works from, publicly display, or exploit any of our intellectual property without express written permission.</p>
+            </section>
+
+            <section>
+                <h2>4. User Conduct</h2>
+                <p>You agree not to:</p>
+                <ul>
+                    <li>Use our services for any unlawful purpose</li>
+                    <li>Attempt to gain unauthorized access to any portion of our services</li>
+                    <li>Interfere with or disrupt the operation of our services</li>
+                    <li>Transmit any viruses, malware, or other harmful code</li>
+                    <li>Violate the rights of others, including privacy and intellectual property rights</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>5. Third-Party Services</h2>
+                <p>Our services may integrate with or contain links to third-party services (such as Apple Music, payment processors, or hosting providers). We are not responsible for the content, privacy policies, or practices of third-party services. Your use of third-party services is at your own risk and subject to their respective terms.</p>
+            </section>
+
+            <section>
+                <h2>6. Disclaimer of Warranties</h2>
+                <div class="legal-notice">
+                    <p style="margin-bottom: 0;">THE SERVICES ARE PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED. SPECLINE TECH LLC DISCLAIMS ALL WARRANTIES, INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. WE DO NOT WARRANT THAT THE SERVICES WILL BE UNINTERRUPTED, ERROR-FREE, OR COMPLETELY SECURE.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>7. Limitation of Liability</h2>
+                <div class="legal-notice">
+                    <p style="margin-bottom: 0;">IN NO EVENT SHALL SPECLINE TECH LLC, ITS OFFICERS, DIRECTORS, EMPLOYEES, OR AGENTS BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES ARISING OUT OF OR RELATED TO YOUR USE OF THE SERVICES, WHETHER BASED ON WARRANTY, CONTRACT, TORT, OR ANY OTHER LEGAL THEORY, EVEN IF WE HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>8. Indemnification</h2>
+                <p>You agree to indemnify, defend, and hold harmless SPECLINE TECH LLC and its officers, directors, employees, and agents from any claims, damages, losses, liabilities, and expenses (including attorneys' fees) arising from your use of the services or your violation of these terms.</p>
+            </section>
+
+            <section>
+                <h2>9. Modifications to Terms</h2>
+                <p>We reserve the right to modify these terms at any time. We will notify users of material changes by posting the updated terms on our website with a new effective date. Your continued use of the services after such changes constitutes acceptance of the modified terms.</p>
+            </section>
+
+            <section>
+                <h2>10. Termination</h2>
+                <p>We may terminate or suspend your access to our services at any time, without prior notice or liability, for any reason, including breach of these terms.</p>
+            </section>
+
+            <section>
+                <h2>11. Governing Law</h2>
+                <p>These terms are governed by and construed in accordance with the laws of the <strong>State of New York</strong>, without regard to its conflict of law principles. Any disputes arising from these terms or your use of the services shall be resolved in the state or federal courts located in New York.</p>
+            </section>
+
+            <section>
+                <h2>12. Severability</h2>
+                <p>If any provision of these terms is found to be unenforceable, the remaining provisions will continue in full force and effect.</p>
+            </section>
+
+            <section>
+                <h2>13. Contact Information</h2>
+                <p>For questions about these terms, please contact:</p>
+                <p><strong>SPECLINE TECH LLC</strong><br>
+                Email: <a href="mailto:hello@specline.co">hello@specline.co</a></p>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+        </div>
+        <p class="footer-text">© 2026 SPECLINE TECH LLC. All rights reserved.</p>
+    </footer>
+</body>
+</html>
