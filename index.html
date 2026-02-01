@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- v2.2 - Full content restored, mobile optimized -->
+<!-- v2.3 - Async fonts, full content, mobile optimized -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,7 +10,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="assets/images/logo-icon.webp" as="image" type="image/webp" fetchpriority="high">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"></noscript>
     
     <style>
         :root {
@@ -185,7 +186,8 @@
             .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--navy-dark); flex-direction: column; padding: 2rem; gap: 1.5rem; }
             .nav-links.active { display: flex; }
             .mobile-menu-btn { display: block; }
-            .hero-glow, .logo-ring { animation: none; opacity: 0.1; }
+            .hero-glow { animation: none; opacity: 0.1; }
+            .logo-ring { animation: none; opacity: 0.2; transform: translate(-50%, -50%) translateZ(0); -webkit-transform: translate(-50%, -50%) translateZ(0); will-change: auto; }
         }
     </style>
 </head>
