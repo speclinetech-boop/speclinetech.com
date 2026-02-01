@@ -64,7 +64,7 @@
             padding: 0 clamp(1.5rem, 5vw, 3rem);
         }
 
-        /* Background Pattern */
+        /* Background Pattern - use transform for GPU layer */
         .bg-pattern {
             position: fixed;
             top: 0;
@@ -78,6 +78,7 @@
                 radial-gradient(circle at 25% 25%, var(--teal) 1px, transparent 1px),
                 radial-gradient(circle at 75% 75%, var(--teal) 1px, transparent 1px);
             background-size: 60px 60px;
+            transform: translateZ(0); /* Force GPU layer */
         }
 
         /* Navigation */
@@ -88,14 +89,25 @@
             right: 0;
             z-index: 1000;
             padding: 1.5rem 0;
-            transition: all 0.4s var(--transition-smooth);
+            transition: padding 0.4s var(--transition-smooth), background-color 0.4s var(--transition-smooth), box-shadow 0.4s var(--transition-smooth);
+            will-change: padding, background-color;
         }
 
         .nav.scrolled {
             background: rgba(14, 47, 80, 0.95);
-            backdrop-filter: blur(20px);
+            /* backdrop-filter removed for performance - solid bg is sufficient */
             padding: 1rem 0;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Enable backdrop-filter only on devices that handle it well */
+        @supports (backdrop-filter: blur(20px)) {
+            @media (min-width: 769px) and (prefers-reduced-motion: no-preference) {
+                .nav.scrolled {
+                    background: rgba(14, 47, 80, 0.85);
+                    backdrop-filter: blur(20px);
+                }
+            }
         }
 
         .nav-inner {
@@ -197,6 +209,8 @@
             filter: blur(150px);
             opacity: 0.15;
             pointer-events: none;
+            will-change: transform;
+            transform: translateZ(0); /* Force GPU layer */
         }
 
         .hero-glow-1 {
@@ -213,9 +227,23 @@
             animation: float 10s ease-in-out infinite reverse;
         }
 
+        /* Pause animations when not visible or when user prefers reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            .hero-glow-1,
+            .hero-glow-2,
+            .logo-ring {
+                animation: none;
+            }
+        }
+
+        /* Pause hero glow animations when hero section is not in viewport */
+        .hero:not(.in-view) .hero-glow {
+            animation-play-state: paused;
+        }
+
         @keyframes float {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(30px, -30px); }
+            0%, 100% { transform: translate3d(0, 0, 0); }
+            50% { transform: translate3d(30px, -30px, 0); }
         }
 
         .hero-content {
@@ -236,11 +264,11 @@
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translate3d(0, 30px, 0);
             }
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translate3d(0, 0, 0);
             }
         }
 
@@ -356,6 +384,7 @@
             transform: translate(-50%, -50%);
             border: 1px solid rgba(34, 202, 194, 0.2);
             border-radius: 50%;
+            will-change: transform, opacity;
             animation: pulse-ring 4s ease-out infinite;
         }
 
@@ -369,6 +398,11 @@
             width: 400px;
             height: 400px;
             animation-delay: 1s;
+        }
+
+        /* Pause ring animations when hero is not visible */
+        .hero:not(.in-view) .logo-ring {
+            animation-play-state: paused;
         }
 
         @keyframes pulse-ring {
@@ -426,7 +460,7 @@
             border: 1px solid rgba(34, 202, 194, 0.1);
             border-radius: 8px;
             padding: 2.5rem;
-            transition: all 0.4s var(--transition-smooth);
+            transition: transform 0.4s var(--transition-smooth), border-color 0.4s var(--transition-smooth), box-shadow 0.4s var(--transition-smooth);
             position: relative;
             overflow: hidden;
         }
@@ -496,7 +530,7 @@
             border: 1px solid rgba(34, 202, 194, 0.15);
             border-radius: 12px;
             overflow: hidden;
-            transition: all 0.4s var(--transition-smooth);
+            transition: transform 0.4s var(--transition-smooth), box-shadow 0.4s var(--transition-smooth), border-color 0.4s var(--transition-smooth);
         }
 
         .venture-card:hover {
@@ -756,7 +790,7 @@
             color: var(--white);
             font-family: var(--font-display);
             font-size: 1rem;
-            transition: all 0.3s var(--transition-smooth);
+            transition: border-color 0.3s var(--transition-smooth), box-shadow 0.3s var(--transition-smooth);
         }
 
         .form-group input:focus,
@@ -913,16 +947,18 @@
             }
         }
 
-        /* Scroll Animations */
+        /* Scroll Animations - optimized with will-change */
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s var(--transition-smooth);
+            transform: translate3d(0, 30px, 0);
+            transition: opacity 0.8s var(--transition-smooth), transform 0.8s var(--transition-smooth);
+            will-change: opacity, transform;
         }
 
         .reveal.active {
             opacity: 1;
-            transform: translateY(0);
+            transform: translate3d(0, 0, 0);
+            will-change: auto; /* Remove will-change after animation completes */
         }
     </style>
 </head>
@@ -953,7 +989,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero" id="hero">
+    <section class="hero in-view" id="hero">
         <div class="hero-glow hero-glow-1"></div>
         <div class="hero-glow hero-glow-2"></div>
         <div class="container">
@@ -1000,8 +1036,8 @@
                 </div>
                 <div class="about-card reveal">
                     <div class="about-icon">✨</div>
-                    <h3>Celebration Focused</h3>
-                    <p>We believe in highlighting the good in people and creating tools that make recognition meaningful and memorable.</p>
+                    <h3>Celebrating People</h3>
+                    <p>We believe in recognizing extraordinary individuals and helping people use their unique abilities for good.</p>
                 </div>
             </div>
         </div>
@@ -1011,19 +1047,19 @@
     <section class="ventures" id="ventures">
         <div class="container">
             <div class="section-header reveal">
-                <p class="section-label">OUR PORTFOLIO</p>
-                <h2 class="section-title">Current Ventures</h2>
-                <p class="section-subtitle">Products and brands under the SPECLINE TECH umbrella.</p>
+                <p class="section-label">OUR VENTURES</p>
+                <h2 class="section-title">Products We're Building</h2>
+                <p class="section-subtitle">From connecting people through music to celebrating everyday heroes.</p>
             </div>
             <div class="ventures-grid">
                 <div class="venture-card reveal">
                     <div class="venture-header">
-                        <span class="venture-status">● LIVE</span>
+                        <span class="venture-status">LIVE ON APP STORE</span>
                         <h3>Social Jukebox</h3>
-                        <p class="venture-tagline">Collaborative Music for Every Moment</p>
+                        <p class="venture-tagline">Turn any gathering into a collaborative DJ experience</p>
                     </div>
                     <div class="venture-body">
-                        <p>A party-ready iOS app that puts the playlist in everyone's hands. DJs host, guests vote, and the best music rises to the top. Perfect for parties, events, and anywhere people gather.</p>
+                        <p>A democratic music experience where everyone gets a voice. Guests vote on songs, the DJ stays in control, and the party never misses a beat. Available now on iOS.</p>
                         <a href="https://socialjukebox.app" class="venture-link" target="_blank">
                             Visit Website
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1034,14 +1070,14 @@
                 </div>
                 <div class="venture-card reveal">
                     <div class="venture-header">
-                        <span class="venture-status">● LIVE</span>
-                        <h3>Superpowers Store</h3>
-                        <p class="venture-tagline">Caught Using Your Superpowers for Good</p>
+                        <span class="venture-status">LAUNCHING SOON</span>
+                        <h3>Use Your Superpowers for Good</h3>
+                        <p class="venture-tagline">A movement to recognize everyday heroes</p>
                     </div>
                     <div class="venture-body">
-                        <p>A recognition and celebration brand that helps people acknowledge the unique talents in others. From merchandise to corporate recognition programs, we help make recognition meaningful.</p>
-                        <a href="https://useyoursuperpowersforgood.com" class="venture-link">
-				Visit Store
+                        <p>Everyone has unique abilities. We're building a platform and movement that celebrates people who use their gifts to make a positive impact in their communities.</p>
+                        <a href="https://useyoursuperpowersforgood.com" class="venture-link" target="_blank">
+                            Visit Website
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                             </svg>
@@ -1181,70 +1217,108 @@
     </footer>
 
     <script>
-        // Navigation scroll effect
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
+        // Performance-optimized JavaScript
+        (function() {
+            'use strict';
+            
+            const navbar = document.getElementById('navbar');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navLinks = document.getElementById('navLinks');
+            const heroSection = document.getElementById('hero');
+            const revealElements = document.querySelectorAll('.reveal');
+            
+            // Throttle function to limit execution rate
+            function throttle(func, limit) {
+                let inThrottle;
+                return function(...args) {
+                    if (!inThrottle) {
+                        func.apply(this, args);
+                        inThrottle = true;
+                        setTimeout(() => inThrottle = false, limit);
+                    }
+                };
             }
-        });
-
-        // Mobile menu toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const navLinks = document.getElementById('navLinks');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenuBtn.classList.toggle('active');
-            navLinks.classList.toggle('active');
-        });
-
-        // Close mobile menu when link is clicked
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenuBtn.classList.remove('active');
-                navLinks.classList.remove('active');
-            });
-        });
-
-        // Scroll reveal animation
-        const revealElements = document.querySelectorAll('.reveal');
-        
-        const revealOnScroll = () => {
-            revealElements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                
-                if (elementTop < windowHeight - 100) {
-                    element.classList.add('active');
+            
+            // Navigation scroll effect - throttled
+            let lastScrollY = 0;
+            const handleScroll = throttle(() => {
+                const scrollY = window.scrollY;
+                if (scrollY > 50 && lastScrollY <= 50) {
+                    navbar.classList.add('scrolled');
+                } else if (scrollY <= 50 && lastScrollY > 50) {
+                    navbar.classList.remove('scrolled');
                 }
+                lastScrollY = scrollY;
+            }, 100);
+            
+            window.addEventListener('scroll', handleScroll, { passive: true });
+
+            // Mobile menu toggle
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenuBtn.classList.toggle('active');
+                navLinks.classList.toggle('active');
             });
-        };
 
-        window.addEventListener('scroll', revealOnScroll);
-        window.addEventListener('load', revealOnScroll);
+            // Close mobile menu when link is clicked
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenuBtn.classList.remove('active');
+                    navLinks.classList.remove('active');
+                });
+            });
 
-        // Form submission (placeholder)
-        document.getElementById('contactForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Thank you for your message! We\'ll be in touch soon.');
-            e.target.reset();
-        });
+            // Use IntersectionObserver for reveal animations (much more performant than scroll events)
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        // Stop observing once revealed (one-time animation)
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '-50px 0px'
+            });
+            
+            revealElements.forEach(el => revealObserver.observe(el));
 
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            // Use IntersectionObserver to pause/play hero animations when out of view
+            const heroObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                    } else {
+                        entry.target.classList.remove('in-view');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            heroObserver.observe(heroSection);
+
+            // Form submission (placeholder)
+            document.getElementById('contactForm').addEventListener('submit', (e) => {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+                alert('Thank you for your message! We\'ll be in touch soon.');
+                e.target.reset();
             });
-        });
+
+            // Smooth scroll for anchor links - use native where possible
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        })();
     </script>
 </body>
 </html>
