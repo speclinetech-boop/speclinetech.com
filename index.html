@@ -6,37 +6,27 @@
     <title>SPECLINE TECH LLC | Technology for Tomorrow</title>
     <meta name="description" content="SPECLINE TECH LLC - A technology holding company building innovative products that connect and celebrate people.">
     
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="assets/images/logo-icon.webp" as="image" type="image/webp" fetchpriority="high">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"></noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            /* Brand Colors */
             --mint-light: #e3f0ef;
             --mint: #e2f1ef;
             --navy: #0e2f50;
             --teal: #22cac2;
-            
-            /* Derived Colors */
             --navy-dark: #091e33;
             --navy-light: #1a4670;
             --teal-glow: rgba(34, 202, 194, 0.3);
             --white: #ffffff;
             --text-primary: #0e2f50;
             --text-secondary: #4a6b8a;
-            
-            /* Typography */
             --font-display: 'Outfit', sans-serif;
             --font-mono: 'Space Mono', monospace;
-            
-            /* Spacing */
             --section-padding: clamp(4rem, 10vw, 8rem);
             --container-max: 1200px;
-            
-            /* Transitions */
             --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -58,14 +48,12 @@
             overflow-x: hidden;
         }
 
-        /* Utility Classes */
         .container {
             max-width: var(--container-max);
             margin: 0 auto;
             padding: 0 clamp(1.5rem, 5vw, 3rem);
         }
 
-        /* Background Pattern - use transform for GPU layer */
         .bg-pattern {
             position: fixed;
             top: 0;
@@ -75,11 +63,11 @@
             pointer-events: none;
             z-index: 0;
             opacity: 0.03;
-            background-image: 
+            background-image:
                 radial-gradient(circle at 25% 25%, var(--teal) 1px, transparent 1px),
                 radial-gradient(circle at 75% 75%, var(--teal) 1px, transparent 1px);
             background-size: 60px 60px;
-            transform: translateZ(0); /* Force GPU layer */
+            transform: translateZ(0);
         }
 
         /* Navigation */
@@ -90,25 +78,13 @@
             right: 0;
             z-index: 1000;
             padding: 1.5rem 0;
-            transition: padding 0.4s var(--transition-smooth), background-color 0.4s var(--transition-smooth), box-shadow 0.4s var(--transition-smooth);
-            will-change: padding, background-color;
+            transition: all 0.4s var(--transition-smooth);
         }
 
         .nav.scrolled {
-            background: rgba(14, 47, 80, 0.95);
-            /* backdrop-filter removed for performance - solid bg is sufficient */
+            background: rgba(14, 47, 80, 0.98);
             padding: 1rem 0;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Enable backdrop-filter only on devices that handle it well */
-        @supports (backdrop-filter: blur(20px)) {
-            @media (min-width: 769px) and (prefers-reduced-motion: no-preference) {
-                .nav.scrolled {
-                    background: rgba(14, 47, 80, 0.85);
-                    backdrop-filter: blur(20px);
-                }
-            }
         }
 
         .nav-inner {
@@ -150,30 +126,10 @@
             text-decoration: none;
             font-size: 0.9rem;
             font-weight: 500;
-            letter-spacing: 0.05em;
-            position: relative;
-            padding: 0.5rem 0;
-            transition: color 0.3s var(--transition-smooth);
+            transition: color 0.3s;
         }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--teal);
-            transition: width 0.3s var(--transition-smooth);
-        }
-
-        .nav-links a:hover {
-            color: var(--teal);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
+        .nav-links a:hover { color: var(--teal); }
 
         .mobile-menu-btn {
             display: none;
@@ -181,6 +137,7 @@
             border: none;
             cursor: pointer;
             padding: 0.5rem;
+            z-index: 1001;
         }
 
         .mobile-menu-btn span {
@@ -189,7 +146,7 @@
             height: 2px;
             background: var(--teal);
             margin: 5px 0;
-            transition: all 0.3s var(--transition-smooth);
+            transition: 0.3s;
         }
 
         /* Hero Section */
@@ -198,7 +155,6 @@
             display: flex;
             align-items: center;
             position: relative;
-            overflow: hidden;
             background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 50%, var(--navy-light) 100%);
         }
 
@@ -210,37 +166,10 @@
             filter: blur(150px);
             opacity: 0.15;
             pointer-events: none;
-            will-change: transform;
-            transform: translateZ(0); /* Force GPU layer */
         }
 
-        .hero-glow-1 {
-            background: var(--teal);
-            top: -200px;
-            right: -100px;
-            animation: float 8s ease-in-out infinite;
-        }
-
-        .hero-glow-2 {
-            background: var(--mint);
-            bottom: -200px;
-            left: -100px;
-            animation: float 10s ease-in-out infinite reverse;
-        }
-
-        /* Pause animations when not visible or when user prefers reduced motion */
-        @media (prefers-reduced-motion: reduce) {
-            .hero-glow-1,
-            .hero-glow-2,
-            .logo-ring {
-                animation: none;
-            }
-        }
-
-        /* Pause hero glow animations when hero section is not in viewport */
-        .hero:not(.in-view) .hero-glow {
-            animation-play-state: paused;
-        }
+        .hero-glow-1 { background: var(--teal); top: -200px; right: -100px; animation: float 8s ease-in-out infinite; }
+        .hero-glow-2 { background: var(--mint); bottom: -200px; left: -100px; animation: float 10s ease-in-out infinite reverse; }
 
         @keyframes float {
             0%, 100% { transform: translate3d(0, 0, 0); }
@@ -248,744 +177,105 @@
         }
 
         .hero-content {
-            position: relative;
-            z-index: 1;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
             align-items: center;
             padding: var(--section-padding) 0;
-        }
-
-        .hero-text {
-            animation: fadeInUp 0.8s var(--transition-smooth) forwards;
-            opacity: 0;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translate3d(0, 30px, 0);
-            }
-            to {
-                opacity: 1;
-                transform: translate3d(0, 0, 0);
-            }
-        }
-
-        .hero-label {
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            color: var(--teal);
-            letter-spacing: 0.2em;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .hero-label::before {
-            content: '';
-            width: 30px;
-            height: 1px;
-            background: var(--teal);
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 700;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.02em;
-        }
-
-        .hero h1 .highlight {
-            color: var(--teal);
             position: relative;
+            z-index: 2;
         }
 
-        .hero-description {
-            font-size: 1.15rem;
-            color: var(--mint-light);
-            margin-bottom: 2.5rem;
-            max-width: 500px;
-            line-height: 1.8;
-        }
-
-        .hero-cta {
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
+        .hero h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; line-height: 1.1; margin-bottom: 1.5rem; }
+        .hero h1 .highlight { color: var(--teal); }
+        .hero-description { font-size: 1.15rem; color: var(--mint-light); margin-bottom: 2.5rem; max-width: 500px; }
 
         .btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
             padding: 1rem 2rem;
-            font-family: var(--font-display);
-            font-size: 0.95rem;
             font-weight: 600;
-            text-decoration: none;
             border-radius: 4px;
-            transition: all 0.3s var(--transition-smooth);
-            cursor: pointer;
-            border: none;
+            transition: 0.3s;
+            text-decoration: none;
         }
 
-        .btn-primary {
-            background: var(--teal);
-            color: var(--navy-dark);
-        }
+        .btn-primary { background: var(--teal); color: var(--navy-dark); }
+        .btn-secondary { background: transparent; color: var(--white); border: 1px solid rgba(255, 255, 255, 0.3); }
 
-        .btn-primary:hover {
-            background: var(--white);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px var(--teal-glow);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--white);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--teal);
-            color: var(--teal);
-        }
-
-        .hero-visual {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            animation: fadeInUp 0.8s var(--transition-smooth) 0.2s forwards;
-            opacity: 0;
-        }
-
-        .logo-showcase {
-            position: relative;
-            width: 300px;
-            height: 300px;
-        }
-
-        .logo-showcase img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 0 10px rgba(34, 202, 194, 0.6))
-                    drop-shadow(0 0 30px rgba(34, 202, 194, 0.4))
-                    drop-shadow(0 0 60px rgba(34, 202, 194, 0.2));
-        }
-
+        .logo-showcase { position: relative; width: 300px; height: 300px; margin: 0 auto; }
+        .logo-showcase img { width: 100%; height: 100%; object-fit: contain; z-index: 2; position: relative; }
+        
         .logo-ring {
             position: absolute;
-            top: 50%;
-            left: 50%;
+            top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             border: 1px solid rgba(34, 202, 194, 0.2);
             border-radius: 50%;
-            will-change: transform, opacity;
+            width: 350px; height: 350px;
             animation: pulse-ring 4s ease-out infinite;
         }
 
-        .logo-ring:nth-child(2) {
-            width: 350px;
-            height: 350px;
-            animation-delay: 0.5s;
-        }
-
-        .logo-ring:nth-child(3) {
-            width: 400px;
-            height: 400px;
-            animation-delay: 1s;
-        }
-
-        /* Pause ring animations when hero is not visible */
-        .hero:not(.in-view) .logo-ring {
-            animation-play-state: paused;
-        }
-
         @keyframes pulse-ring {
-            0% {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(1.3);
-            }
+            0% { opacity: 1; transform: translate(-50%, -50%) scale(0.8); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1.3); }
         }
 
-        /* About Section */
-        .about {
-            background: linear-gradient(180deg, var(--navy) 0%, var(--navy-dark) 100%);
-            padding: var(--section-padding) 0;
-            position: relative;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .section-label {
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            color: var(--teal);
-            letter-spacing: 0.2em;
-            margin-bottom: 1rem;
-        }
-
-        .section-title {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .section-subtitle {
-            font-size: 1.1rem;
-            color: var(--mint-light);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .about-card {
-            background: linear-gradient(135deg, rgba(34, 202, 194, 0.05) 0%, rgba(14, 47, 80, 0.3) 100%);
-            border: 1px solid rgba(34, 202, 194, 0.1);
-            border-radius: 8px;
-            padding: 2.5rem;
-            transition: transform 0.4s var(--transition-smooth), border-color 0.4s var(--transition-smooth), box-shadow 0.4s var(--transition-smooth);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .about-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--teal), transparent);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s var(--transition-smooth);
-        }
-
-        .about-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(34, 202, 194, 0.3);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .about-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .about-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--teal), var(--navy-light));
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-        }
-
-        .about-card h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .about-card p {
-            color: var(--mint-light);
-            font-size: 0.95rem;
-            line-height: 1.7;
-        }
-
-        /* Ventures Section */
-        .ventures {
-            background: var(--navy-dark);
-            padding: var(--section-padding) 0;
-            position: relative;
-        }
-
-        .ventures-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 3rem;
-        }
-
-        .venture-card {
-            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
-            border: 1px solid rgba(34, 202, 194, 0.15);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: transform 0.4s var(--transition-smooth), box-shadow 0.4s var(--transition-smooth), border-color 0.4s var(--transition-smooth);
-        }
-
-        .venture-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
-            border-color: var(--teal);
-        }
-
-        .venture-header {
-            padding: 2.5rem;
-            background: linear-gradient(135deg, rgba(34, 202, 194, 0.1) 0%, transparent 100%);
-            border-bottom: 1px solid rgba(34, 202, 194, 0.1);
-        }
-
-        .venture-status {
-            display: inline-block;
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            color: var(--teal);
-            background: rgba(34, 202, 194, 0.15);
-            padding: 0.35rem 0.75rem;
-            border-radius: 20px;
-            letter-spacing: 0.1em;
-            margin-bottom: 1rem;
-        }
-
-        .venture-card h3 {
-            font-size: 1.75rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .venture-tagline {
-            color: var(--mint-light);
-            font-size: 1rem;
-        }
-
-        .venture-body {
-            padding: 2.5rem;
-        }
-
-        .venture-body p {
-            color: var(--mint-light);
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
-        }
-
-        .venture-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--teal);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: gap 0.3s var(--transition-smooth);
-        }
-
-        .venture-link:hover {
-            gap: 1rem;
-        }
-
-        .venture-link svg {
-            width: 18px;
-            height: 18px;
-        }
+        /* Ventures */
+        .ventures { background: var(--navy-dark); }
+        .ventures-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; }
+        .venture-card { background: var(--navy); border: 1px solid rgba(34, 202, 194, 0.15); border-radius: 12px; overflow: hidden; transition: 0.3s; }
+        .venture-card:hover { border-color: var(--teal); transform: translateY(-5px); }
+        .venture-header { padding: 2.5rem; background: rgba(34, 202, 194, 0.05); }
+        .venture-body { padding: 2.5rem; }
+        .venture-status { color: var(--teal); font-family: var(--font-mono); font-size: 0.75rem; display: block; margin-bottom: 0.5rem; }
 
         /* Mission Section */
-        .mission {
-            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
-            padding: var(--section-padding) 0;
-            position: relative;
-        }
+        .mission { background: linear-gradient(180deg, var(--navy) 0%, var(--navy-dark) 100%); padding: var(--section-padding) 0; }
+        .mission-content { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .name-meaning { background: rgba(34, 202, 194, 0.05); padding: 3rem; border-radius: 15px; border: 1px solid rgba(34, 202, 194, 0.1); }
+        .name-letters { display: flex; flex-wrap: wrap; gap: 2rem; }
+        .letter-item { text-align: center; flex: 1; min-width: 80px; }
+        .letter { font-family: var(--font-mono); font-size: 3rem; color: var(--teal); font-weight: 700; display: block; }
+        .letter-name { font-size: 0.9rem; color: var(--mint-light); }
+        
+        .spencer-memorial { margin-top: 6rem; padding-top: 4rem; border-top: 1px solid rgba(34, 202, 194, 0.1); }
+        .memorial-content { max-width: 800px; margin: 0 auto; text-align: center; }
+        .memorial-dates { font-family: var(--font-mono); color: var(--teal); margin-bottom: 1.5rem; display: block; }
+        .memorial-text { font-size: 1.1rem; line-height: 1.8; color: var(--mint-light); margin-bottom: 1.5rem; }
 
-        .mission-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .mission-text h2 {
-            font-size: clamp(2rem, 4vw, 2.75rem);
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-        }
-
-        .mission-text p {
-            color: var(--mint-light);
-            font-size: 1.1rem;
-            line-height: 1.9;
-            margin-bottom: 1.5rem;
-        }
-
-        .name-meaning {
-            background: linear-gradient(135deg, rgba(34, 202, 194, 0.1) 0%, rgba(14, 47, 80, 0.5) 100%);
-            border: 1px solid rgba(34, 202, 194, 0.2);
-            border-radius: 12px;
-            padding: 2.5rem;
-        }
-
-        .name-letters {
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .letter-item {
-            text-align: center;
-        }
-
-        .letter {
-            font-family: var(--font-mono);
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--teal);
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .letter-name {
-            font-size: 0.9rem;
-            color: var(--mint-light);
-        }
-
-        /* Spencer Memorial */
-        .spencer-memorial {
-            margin-top: 4rem;
-            padding-top: 4rem;
-            border-top: 1px solid rgba(34, 202, 194, 0.1);
-        }
-
-        .memorial-content {
-            max-width: 700px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .memorial-label {
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            color: var(--teal);
-            letter-spacing: 0.2em;
-            margin-bottom: 1rem;
-        }
-
-        .memorial-content h3 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .memorial-dates {
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            color: var(--mint-light);
-            margin-bottom: 2rem;
-        }
-
-        .memorial-text {
-            color: var(--mint-light);
-            font-size: 1.05rem;
-            line-height: 1.9;
-            margin-bottom: 1.5rem;
-        }
-
-        .memorial-help {
-            margin-top: 2.5rem;
-            padding: 1.5rem;
-            background: rgba(34, 202, 194, 0.1);
-            border-radius: 8px;
-            font-size: 0.95rem;
-            color: var(--mint-light);
-        }
-
-        .memorial-help a {
-            color: var(--teal);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .memorial-help a:hover {
-            text-decoration: underline;
-        }
-
-        /* Contact Section */
-        .contact {
-            background: var(--navy-dark);
-            padding: var(--section-padding) 0;
-        }
-
-        .contact-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-        }
-
-        .contact-info h2 {
-            font-size: clamp(2rem, 4vw, 2.5rem);
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-        }
-
-        .contact-info p {
-            color: var(--mint-light);
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 2rem;
-        }
-
-        .contact-details {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            color: var(--mint-light);
-        }
-
-        .contact-item svg {
-            width: 20px;
-            height: 20px;
-            color: var(--teal);
-        }
-
-        .contact-form {
-            background: linear-gradient(135deg, rgba(34, 202, 194, 0.05) 0%, rgba(14, 47, 80, 0.3) 100%);
-            border: 1px solid rgba(34, 202, 194, 0.15);
-            border-radius: 12px;
-            padding: 2.5rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.9rem;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-            color: var(--mint-light);
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem;
-            background: rgba(14, 47, 80, 0.5);
-            border: 1px solid rgba(34, 202, 194, 0.2);
-            border-radius: 6px;
-            color: var(--white);
-            font-family: var(--font-display);
-            font-size: 1rem;
-            transition: border-color 0.3s var(--transition-smooth), box-shadow 0.3s var(--transition-smooth);
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--teal);
-            box-shadow: 0 0 0 3px var(--teal-glow);
-        }
-
-        .form-group textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
+        /* Contact */
+        .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+        .contact-form { background: rgba(34, 202, 194, 0.05); padding: 2.5rem; border-radius: 12px; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; color: var(--mint-light); font-size: 0.9rem; }
+        .form-group input, .form-group textarea { width: 100%; padding: 1rem; background: var(--navy-dark); border: 1px solid rgba(34, 202, 194, 0.2); color: white; border-radius: 6px; font-family: inherit; }
 
         /* Footer */
-        .footer {
-            background: var(--navy-dark);
-            border-top: 1px solid rgba(34, 202, 194, 0.1);
-            padding: 3rem 0;
-        }
+        footer { padding: 3rem 0; border-top: 1px solid rgba(34, 202, 194, 0.1); text-align: center; color: var(--text-secondary); font-size: 0.9rem; }
 
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 2rem;
-        }
-
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .footer-logo img {
-            height: 32px;
-            width: auto;
-            filter: drop-shadow(0 0 6px rgba(34, 202, 194, 0.5));
-        }
-
-        .footer-text {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .footer-links a {
-            color: var(--mint-light);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.3s var(--transition-smooth);
-        }
-
-        .footer-links a:hover {
-            color: var(--teal);
-        }
-
-        /* Responsive */
+        /* Mobile Adjustments */
         @media (max-width: 968px) {
-            .hero-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .hero-text {
-                order: 2;
-            }
-
-            .hero-visual {
-                order: 1;
-            }
-
-            .hero-label {
-                justify-content: center;
-            }
-
-            .hero-description {
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            .hero-cta {
-                justify-content: center;
-            }
-
-            .about-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .ventures-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .mission-content {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-wrapper {
-                grid-template-columns: 1fr;
-            }
+            .hero-content, .mission-content, .contact-wrapper { grid-template-columns: 1fr; text-align: center; }
+            .hero-description { margin: 0 auto 2.5rem; }
+            .hero-cta { justify-content: center; }
+            .name-letters { justify-content: center; }
         }
 
         @media (max-width: 768px) {
             .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: rgba(14, 47, 80, 0.98);
-                flex-direction: column;
-                padding: 2rem;
-                gap: 1.5rem;
-                border-top: 1px solid rgba(34, 202, 194, 0.1);
+                display: none; position: absolute; top: 100%; left: 0; right: 0;
+                background: var(--navy-dark); flex-direction: column; padding: 2rem; gap: 1.5rem;
             }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .mobile-menu-btn.active span:nth-child(1) {
-                transform: rotate(45deg) translate(5px, 5px);
-            }
-
-            .mobile-menu-btn.active span:nth-child(2) {
-                opacity: 0;
-            }
-
-            .mobile-menu-btn.active span:nth-child(3) {
-                transform: rotate(-45deg) translate(5px, -5px);
-            }
-
-            .logo-showcase {
-                width: 200px;
-                height: 200px;
-            }
-
-            .name-letters {
-                justify-content: center;
-            }
-
-            .footer-content {
-                flex-direction: column;
-                text-align: center;
-            }
-        }
-
-        /* Scroll Animations - CSS-only, content visible immediately */
-        .reveal {
-            opacity: 1;
-            transform: translate3d(0, 0, 0);
-            animation: revealFadeIn 0.8s var(--transition-smooth) both;
-        }
-
-        @keyframes revealFadeIn {
-            from {
-                opacity: 0;
-                transform: translate3d(0, 30px, 0);
-            }
-            to {
-                opacity: 1;
-                transform: translate3d(0, 0, 0);
-            }
-        }
-
-        /* Stagger animations for visual interest */
-        .reveal:nth-child(1) { animation-delay: 0.1s; }
-        .reveal:nth-child(2) { animation-delay: 0.2s; }
-        .reveal:nth-child(3) { animation-delay: 0.3s; }
-        .reveal:nth-child(4) { animation-delay: 0.4s; }
-
-        /* For users who prefer reduced motion */
-        @media (prefers-reduced-motion: reduce) {
-            .reveal {
-                animation: none;
-                opacity: 1;
-                transform: none;
-            }
+            .nav-links.active { display: flex; }
+            .mobile-menu-btn { display: block; }
+            .hero-glow, .logo-ring { animation: none; opacity: 0.1; } /* Mobile Performance Fix */
         }
     </style>
 </head>
 <body>
     <div class="bg-pattern"></div>
 
-    <!-- Navigation -->
     <nav class="nav" id="navbar">
         <div class="container">
             <div class="nav-inner">
@@ -1000,315 +290,166 @@
                     <li><a href="#contact">Contact</a></li>
                 </ul>
                 <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                    <span></span><span></span><span></span>
                 </button>
             </div>
         </div>
     </nav>
+
     <main>
+        <section class="hero" id="hero">
+            <div class="hero-glow hero-glow-1"></div>
+            <div class="hero-glow hero-glow-2"></div>
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <p class="logo-text" style="margin-bottom: 1rem;">TECHNOLOGY HOLDING COMPANY</p>
+                        <h1>Building Products That <span class="highlight">Connect</span> & <span class="highlight">Celebrate</span></h1>
+                        <p class="hero-description">SPECLINE TECH LLC builds innovative products like Social Jukebox and the Superpowers Store to bring people together and celebrate what makes them extraordinary.</p>
+                        <div class="hero-cta">
+                            <a href="#ventures" class="btn btn-primary">Our Ventures</a>
+                            <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                        </div>
+                    </div>
+                    <div class="hero-visual">
+                        <div class="logo-showcase">
+                            <div class="logo-ring"></div>
+                            <img src="assets/images/logo-icon.webp" alt="Specline Tech Logo" width="300" height="300">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <section class="ventures" id="ventures">
+            <div class="container">
+                <div style="text-align: center; margin-bottom: 4rem;">
+                    <p class="logo-text" style="color: var(--teal);">OUR VENTURES</p>
+                    <h2 style="font-size: clamp(2rem, 4vw, 3rem);">Products in Development</h2>
+                </div>
+                <div class="ventures-grid">
+                    <div class="venture-card">
+                        <div class="venture-header">
+                            <span class="venture-status">● LIVE</span>
+                            <h3>Social Jukebox</h3>
+                        </div>
+                        <div class="venture-body">
+                            <p>A democratic music app where guests vote on the playlist, ensuring the party never misses a beat and the host stays in control.</p>
+                        </div>
+                    </div>
+                    <div class="venture-card">
+                        <div class="venture-header">
+                            <span class="venture-status">● LIVE</span>
+                            <h3>Superpowers Store</h3>
+                        </div>
+                        <div class="venture-body">
+                            <p>A merchandise line and community movement celebrating individuals who use their unique gifts to make a positive impact.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <!-- Hero Section -->
-    <section class="hero in-view" id="hero">
-        <div class="hero-glow hero-glow-1"></div>
-        <div class="hero-glow hero-glow-2"></div>
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <p class="hero-label">TECHNOLOGY HOLDING COMPANY</p>
-                    <h1>Building Products That <span class="highlight">Connect</span> & <span class="highlight">Celebrate</span></h1>
-                    <p class="hero-description">SPECLINE TECH LLC is a technology holding company creating innovative products that bring people together and recognize what makes them extraordinary.</p>
-                    <div class="hero-cta">
-                        <a href="#ventures" class="btn btn-primary">Our Ventures</a>
-                        <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+        <section class="mission" id="mission">
+            <div class="container">
+                <div class="mission-content">
+                    <div class="mission-text">
+                        <p class="logo-text" style="color: var(--teal);">OUR MISSION</p>
+                        <h2>Built for Family, Designed for Everyone</h2>
+                        <p>SPECLINE TECH is more than a company—it's a commitment. The name is an acronym for our four children: Spencer, Claire, Liam, and Neyden. Every decision we make is driven by building a legacy for them.</p>
+                    </div>
+                    <div class="name-meaning">
+                        <div class="name-letters">
+                            <div class="letter-item"><span class="letter">S</span><span class="letter-name">Spencer</span></div>
+                            <div class="letter-item"><span class="letter">C</span><span class="letter-name">Claire</span></div>
+                            <div class="letter-item"><span class="letter">L</span><span class="letter-name">Liam</span></div>
+                            <div class="letter-item"><span class="letter">N</span><span class="letter-name">Neyden</span></div>
+                        </div>
                     </div>
                 </div>
-                <div class="hero-visual">
-                    <div class="logo-showcase">
-                        <div class="logo-ring"></div>
-                        <div class="logo-ring"></div>
-                        <div class="logo-ring"></div>
-                        <img src="assets/images/logo-icon.webp" alt="SPECLINE TECH Logo" width="300" height="300" fetchpriority="high">
+                
+                <div class="spencer-memorial">
+                    <div class="memorial-content">
+                        <p class="logo-text" style="color: var(--teal);">IN LOVING MEMORY</p>
+                        <h3>Spencer Calzadilla</h3>
+                        <span class="memorial-dates">February 13, 1994 — March 4, 2022</span>
+                        <p class="memorial-text">The "SPE" in SPECLINE honors Spencer, a U.S. Marine and ASU graduate. He was passionate about bridging political divides and believed in creating a better society for everyone. Every product we build carries his spirit and his dream forward.</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="container">
-            <div class="section-header reveal">
-                <p class="section-label">WHO WE ARE</p>
-                <h2 class="section-title">Technology With Purpose</h2>
-                <p class="section-subtitle">We create products that make meaningful connections and celebrate the best in people.</p>
-            </div>
-            <div class="about-grid">
-                <div class="about-card reveal">
-                    <div class="about-icon">🚀</div>
-                    <h3>Innovation First</h3>
-                    <p>We leverage cutting-edge technology to build products that solve real problems and create genuine value for our users.</p>
-                </div>
-                <div class="about-card reveal">
-                    <div class="about-icon">🤝</div>
-                    <h3>Connection Driven</h3>
-                    <p>Every product we build is designed to bring people together, whether through music, recognition, or shared experiences.</p>
-                </div>
-                <div class="about-card reveal">
-                    <div class="about-icon">✨</div>
-                    <h3>Celebrating People</h3>
-                    <p>We believe in recognizing extraordinary individuals and helping people use their unique abilities for good.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Ventures Section -->
-    <section class="ventures" id="ventures">
-        <div class="container">
-            <div class="section-header reveal">
-                <p class="section-label">OUR VENTURES</p>
-                <h2 class="section-title">Products We're Building</h2>
-                <p class="section-subtitle">From connecting people through music to celebrating everyday heroes.</p>
-            </div>
-            <div class="ventures-grid">
-                <div class="venture-card reveal">
-                    <div class="venture-header">
-                        <span class="venture-status">● LIVE</span>
-                        <h3>Social Jukebox</h3>
-                        <p class="venture-tagline">Collaborative Music for Every Moment</p>
+        <section class="contact" id="contact">
+            <div class="container">
+                <div class="contact-wrapper">
+                    <div class="contact-info">
+                        <p class="logo-text" style="color: var(--teal);">GET IN TOUCH</p>
+                        <h2>Let's Build Something Together</h2>
+                        <p>Based in New York, we are always looking for meaningful partnerships and innovative ideas.</p>
                     </div>
-                    <div class="venture-body">
-                        <p>A democratic music experience where everyone gets a voice. Guests vote on songs, the DJ stays in control, and the party never misses a beat. Available now on iOS.</p>
-                        <a href="https://socialjukebox.app" class="venture-link" target="_blank">
-                            Visit Website
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                <div class="venture-card reveal">
-                    <div class="venture-header">
-                        <span class="venture-status">● LIVE</span>
-                        <h3>Superpowers Store</h3>
-                        <p class="venture-tagline">Caught Using Your Superpowers for Good</p>
-                    </div>
-                    <div class="venture-body">
-                        <p>Everyone has unique abilities. We're building a platform and movement that celebrates people who use their gifts to make a positive impact in their communities.</p>
-                        <a href="https://useyoursuperpowersforgood.com" class="venture-link" target="_blank">
-                            Visit Website
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </svg>
-                        </a>
+                    <div class="contact-form">
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label>Your Name</label>
+                                <input type="text" placeholder="Full Name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input type="email" placeholder="email@example.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Message</label>
+                                <textarea placeholder="How can we help?" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width:100%; cursor: pointer;">Send Message</button>
+                        </form>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Mission Section -->
-    <section class="mission" id="mission">
-        <div class="container">
-            <div class="mission-content">
-                <div class="mission-text reveal">
-                    <p class="section-label">OUR MISSION</p>
-                    <h2>Built for Family, Designed for Everyone</h2>
-                    <p>SPECLINE TECH isn't just a company name—it's a commitment. The name represents our four children: Spencer, Claire, Liam, and Neyden. Every product we create, every decision we make, is driven by the goal of building a future for them.</p>
-                    <p>This personal mission drives us to create products that genuinely matter—tools that help people connect, celebrate, and recognize what makes each other special.</p>
-                </div>
-                <div class="name-meaning reveal">
-                    <div class="name-letters">
-                        <div class="letter-item">
-                            <span class="letter">S</span>
-                            <span class="letter-name">Spencer</span>
-                        </div>
-                        <div class="letter-item">
-                            <span class="letter">P</span>
-                            <span class="letter-name">—</span>
-                        </div>
-                        <div class="letter-item">
-                            <span class="letter">E</span>
-                            <span class="letter-name">—</span>
-                        </div>
-                        <div class="letter-item">
-                            <span class="letter">C</span>
-                            <span class="letter-name">Claire</span>
-                        </div>
-                        <div class="letter-item">
-                            <span class="letter">L</span>
-                            <span class="letter-name">Liam</span>
-                        </div>
-                        <div class="letter-item">
-                            <span class="letter">I</span>
-                            <span class="letter-name">—</span>
-                        </div>
-                        <div class="letter-item">
-                            <span class="letter">N</span>
-                            <span class="letter-name">Neyden</span>
-                        </div>
-                        <div class="letter-item">
-                            <span class="letter">E</span>
-                            <span class="letter-name">—</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Spencer Memorial -->
-            <div class="spencer-memorial reveal">
-                <div class="memorial-content">
-                    <p class="memorial-label">In Loving Memory</p>
-                    <h3>Spencer Calzadilla</h3>
-                    <p class="memorial-dates">February 13, 1994 — March 4, 2022</p>
-                    <p class="memorial-text">The "SPE" in SPECLINE honors Spencer, the oldest of the children. A proud United States Marine who served his country for five years. A scholar who graduated Summa Cum Laude from Arizona State University. A man who planned to attend ASU Law School because, in his words, "I have to believe that we can do better as a society."</p>
-                    <p class="memorial-text">Spencer was passionate about bridging divides — serving on the board of BridgeASU, a non-partisan organization at Arizona State University seeking more effective political discourse. He dreamed of making a difference, of changing the world.</p>
-                    <p class="memorial-text">He was not just a son, but a friend. Every product we build carries his spirit forward.</p>
-                    <p class="memorial-help">If you or someone you know is struggling, please reach out. <a href="https://988lifeline.org" target="_blank">988 Suicide & Crisis Lifeline</a> — Call or text 988, available 24/7.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="contact-wrapper">
-                <div class="contact-info reveal">
-                    <p class="section-label">GET IN TOUCH</p>
-                    <h2>Let's Build Something Together</h2>
-                    <p>Whether you're interested in partnership opportunities, have questions about our products, or want to explore how we can work together—we'd love to hear from you.</p>
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                            </svg>
-                            <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="58303d343437182b283d3b3431363d2c3d3b30763b3735">[email&#160;protected]</a></span>
-                        </div>
-                        <div class="contact-item">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                            </svg>
-                            <span>New York, United States</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-form reveal">
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <label for="name">Your Name</label>
-                            <input type="text" id="name" name="name" required placeholder="John Doe">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" required placeholder="john@example.com">
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" required placeholder="Partnership Inquiry">
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" required placeholder="Tell us about your project or inquiry..."></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
+        </section>
     </main>
 
-    <footer class="footer">
+    <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <img src="assets/images/logo-icon.webp" alt="SPECLINE TECH" width="40" height="40">
-                    <span class="footer-text">© 2026 SPECLINE TECH LLC. All rights reserved.</span>
-                </div>
-                <div class="footer-links">
-                    <a href="privacy.html">Privacy Policy</a>
-                    <a href="terms.html">Terms of Service</a>
-                </div>
-            </div>
+            <p>© 2026 SPECLINE TECH LLC. All rights reserved.</p>
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        // Performance-optimized JavaScript
+    <script>
         (function() {
-            'use strict';
-            
             const navbar = document.getElementById('navbar');
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
             const navLinks = document.getElementById('navLinks');
-            const heroSection = document.getElementById('hero');
-            
-            // Navigation scroll effect - optimized with rAF
-            let lastScrollY = 0;
-            let ticking = false;
+
+            // Scroll Effect for Navbar
             window.addEventListener('scroll', () => {
-                if (!ticking) {
-                    window.requestAnimationFrame(() => {
-                        const scrollY = window.scrollY;
-                        if (scrollY > 50 && lastScrollY <= 50) {
-                            navbar.classList.add('scrolled');
-                        } else if (scrollY <= 50 && lastScrollY > 50) {
-                            navbar.classList.remove('scrolled');
-                        }
-                        lastScrollY = scrollY;
-                        ticking = false;
-                    });
-                    ticking = true;
-                }
+                navbar.classList.toggle('scrolled', window.scrollY > 50);
             }, { passive: true });
 
-            // Mobile menu toggle
+            // Mobile Menu Toggle
             mobileMenuBtn.addEventListener('click', () => {
-                mobileMenuBtn.classList.toggle('active');
                 navLinks.classList.toggle('active');
             });
 
-            // Close mobile menu when link is clicked
-            navLinks.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenuBtn.classList.remove('active');
-                    navLinks.classList.remove('active');
-                });
-            });
-
-            // Use IntersectionObserver to pause/play hero animations when out of view
-            const heroObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('in-view');
-                    } else {
-                        entry.target.classList.remove('in-view');
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-            
-            heroObserver.observe(heroSection);
-
-            // Form submission (placeholder)
-            document.getElementById('contactForm').addEventListener('submit', (e) => {
-                e.preventDefault();
-                alert('Thank you for your message! We\'ll be in touch soon.');
-                e.target.reset();
-            });
-
-            // Smooth scroll for anchor links - use native where possible
+            // FIXED Smooth Scroll Logic
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     e.preventDefault();
                     const target = document.querySelector(this.getAttribute('href'));
                     if (target) {
-                        target.scrol
+                        navLinks.classList.remove('active');
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+
+            // Form Alert
+            document.getElementById('contactForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Thank you for your message! We\'ll be in touch soon.');
+                e.target.reset();
+            });
+        })();
+    </script>
+</body>
+</html>
