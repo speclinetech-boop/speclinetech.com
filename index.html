@@ -1232,31 +1232,24 @@
             const heroSection = document.getElementById('hero');
             const revealElements = document.querySelectorAll('.reveal');
             
-            // Throttle function to limit execution rate
-            function throttle(func, limit) {
-                let inThrottle;
-                return function(...args) {
-                    if (!inThrottle) {
-                        func.apply(this, args);
-                        inThrottle = true;
-                        setTimeout(() => inThrottle = false, limit);
-                    }
-                };
-            }
-            
-            // Navigation scroll effect - throttled
+            // Navigation scroll effect - optimized with rAF
             let lastScrollY = 0;
-            const handleScroll = throttle(() => {
-                const scrollY = window.scrollY;
-                if (scrollY > 50 && lastScrollY <= 50) {
-                    navbar.classList.add('scrolled');
-                } else if (scrollY <= 50 && lastScrollY > 50) {
-                    navbar.classList.remove('scrolled');
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        const scrollY = window.scrollY;
+                        if (scrollY > 50 && lastScrollY <= 50) {
+                            navbar.classList.add('scrolled');
+                        } else if (scrollY <= 50 && lastScrollY > 50) {
+                            navbar.classList.remove('scrolled');
+                        }
+                        lastScrollY = scrollY;
+                        ticking = false;
+                    });
+                    ticking = true;
                 }
-                lastScrollY = scrollY;
-            }, 100);
-            
-            window.addEventListener('scroll', handleScroll, { passive: true });
+            }, { passive: true });
 
             // Mobile menu toggle
             mobileMenuBtn.addEventListener('click', () => {
