@@ -100,7 +100,7 @@
         .section-title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; margin-bottom: 1rem; }
         .section-subtitle { color: var(--mint-light); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
 
-        .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 2rem; }
         .about-card { background: rgba(14, 47, 80, 0.4); border: 1px solid rgba(34, 202, 194, 0.1); padding: 2.5rem; border-radius: 12px; text-align: center; transition: all 0.3s var(--transition-smooth); }
         .about-card:hover { transform: translateY(-5px); border-color: var(--teal); }
         .about-icon { font-size: 2.5rem; margin-bottom: 1.5rem; }
@@ -109,7 +109,7 @@
 
         /* Ventures */
         .ventures { background: var(--navy-dark); padding: var(--section-padding) 0; }
-        .ventures-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; }
+        .ventures-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr)); gap: 3rem; }
         .venture-card { background: var(--navy); border: 1px solid rgba(34, 202, 194, 0.15); border-radius: 12px; overflow: hidden; transition: all 0.3s var(--transition-smooth); }
         .venture-card:hover { transform: translateY(-5px); border-color: var(--teal); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); }
         .venture-header { padding: 2.5rem; background: rgba(34, 202, 194, 0.05); }
@@ -188,6 +188,7 @@
             .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--navy-dark); flex-direction: column; padding: 2rem; gap: 1.5rem; }
             .nav-links.active { display: flex; }
             .mobile-menu-btn { display: block; }
+            .bg-pattern { position: absolute; }
             .hero-glow { animation: none; opacity: 0.1; }
             .logo-ring { animation: none; opacity: 0.5; border-width: 2px; transform: translate(-50%, -50%) translateZ(0); -webkit-transform: translate(-50%, -50%) translateZ(0); }
         }
@@ -432,11 +433,15 @@
                 });
             });
 
-            // Form submission
+            // Form submission — opens user's email client with pre-filled message
             document.getElementById('contactForm').addEventListener('submit', (e) => {
                 e.preventDefault();
-                alert('Thank you for your message! We\'ll be in touch soon.');
-                e.target.reset();
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value;
+                const body = 'Name: ' + name + '\nEmail: ' + email + '\n\n' + message;
+                window.location.href = 'mailto:hello@specline.co?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
             });
         })();
     </script>
