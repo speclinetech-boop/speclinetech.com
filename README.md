@@ -2,32 +2,37 @@
 
 Official corporate website for SPECLINE TECH LLC, a technology holding company.
 
-## 🚀 Live Site
+## Live Site
 
 [speclinetech.com](https://speclinetech.com)
 
-## 📁 Structure
+## Structure
 
 ```
 speclinetech.com/
-├── index.html          # Main website
+├── index.html
+├── privacy.html
+├── terms.html
+├── vercel.json
 ├── assets/
+│   ├── css/
+│   │   └── legal.css    # Shared styles for legal pages
 │   └── images/
-│       └── logo.png    # Company logo
+│       └── logo-icon.webp
 └── README.md
 ```
 
-## 🛠 Tech Stack
+## Tech Stack
 
 - **Hosting:** Vercel
 - **DNS/Security:** Cloudflare
 - **Repository:** GitHub
 
-## 🏢 Ventures
+## Ventures
 
 - **Social Jukebox** - Collaborative music app for parties and events
 - **Superpowers Store** - Recognition and celebration brand (Coming Soon)
 
-## 📝 License
+## License
 
 © 2026 SPECLINE TECH LLC. All rights reserved.
